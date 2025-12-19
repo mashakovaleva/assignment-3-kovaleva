@@ -72,7 +72,7 @@ class FasttextVectorizer:
                 vector_line = " ".join(map(str, vector))
                 w.write(f"{phrase} {vector_line}\n")
 
-def process_data(input_file, output_file):
+def process_data(input_file, output_file, ft_vec, with_dict=False):
     phrases = []
     with open(input_file, 'r', encoding='utf-8') as f:
         #dataset = f.read().lower().split("\n")[:-1]
