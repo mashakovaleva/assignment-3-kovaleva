@@ -1,0 +1,9 @@
+{
+  "ruwordnet_vectors_path": "models/vectors/node2vec/node2vec_ru_nouns_new.txt",
+  "data_vectors_path": "models/vectors/fasttext/nouns_private_fasttext1.txt",
+  "test_path": "../data/private_test/nouns_private.tsv",
+  "output_path": "predictions/predicted_private_nouns_second_order_graph_new.tsv",
+  "db_path": "../data/ruwordnet.db",
+  "ruwordnet_path": null,
+  "model": "second_order_transform"
+}
