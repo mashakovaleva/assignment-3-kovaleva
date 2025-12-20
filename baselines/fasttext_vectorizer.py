@@ -6,8 +6,7 @@ from gensim.models.fasttext import load_facebook_model
 from string import punctuation
 from ruwordnet.ruwordnet_reader import RuWordnet
 
-from gpt_dicts.public_nouns import enrich_public_nous, normalize_key
-#from gpt_dicts.private_nouns import enrich_private_nous
+from gpt_dicts.enrichment_dict import enrich_dict, normalize_key
 
 
 class FasttextVectorizer:
@@ -72,7 +71,7 @@ class FasttextVectorizer:
                 vector_line = " ".join(map(str, vector))
                 w.write(f"{phrase} {vector_line}\n")
 
-def process_data(input_file, output_file, ft_vec, with_dict=False):
+def process_data(input_file, output_file, with_dict=False):
     phrases = []
     with open(input_file, 'r', encoding='utf-8') as f:
         #dataset = f.read().lower().split("\n")[:-1]
@@ -84,7 +83,7 @@ def process_data(input_file, output_file, ft_vec, with_dict=False):
             phrase = phrase.strip().lower() 
             if with_dict:
                 #related_words = ' '.join(enrich_public_nous[normalize_key(phrase)]) 
-                phrase = phrase + ' ' + enrich_public_nous[normalize_key(phrase)][0] # related_words
+                phrase = phrase + ' ' + enrich_dict[normalize_key(phrase)][0] # related_words
             if phrase:
                 phrases.append(phrase)
     print(f'In process data {phrases[:2]}')
@@ -113,7 +112,7 @@ if __name__ == '__main__':
     ft_vec.vectorize_ruwordnet(noun_synsets, "models/vectors/ruwordnet_nouns_fasttext.txt")
     ft_vec.vectorize_ruwordnet(verb_synsets, "models/vectors/ruwordnet_verbs_fasttext.txt")
 
-    enrich_public_nous = {normalize_key(k): v for k, v in enrich_public_nous.items()}
+    enrich_dict = {normalize_key(k): v for k, v in enrich_dict.items()}
     # process_data("../data/public_test/verbs_public.tsv", "models/vectors/verbs_public_fasttext1.txt")
     #process_data("../data/public_test/nouns_public.tsv", "models/vectors/fasttext_with_gpt_dict/nouns_public_fasttext2.txt")
    # process_data("../data/public_test/verbs_public.tsv", "models/vectors/fasttext_with_gpt_dict/verbs_public_fasttext.txt")
