@@ -159,7 +159,5 @@ baselines/models/cc.ru.300.bin
 baselines/models/vectors/
 baselines/models/node2vec_*
 baselines/predictions/
-data/*.db
-data/*.zip
 baselines/data/ruwordnet_xml/
 baselines/data/*.db
